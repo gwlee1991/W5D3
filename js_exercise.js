@@ -226,4 +226,56 @@ function subsets(arr) {
   return prevSubs.concat(prevSubs.map((ele) => ele.concat(last)));
 }
 
-console.log(subsets([1,2,3]));
+// console.log(subsets([1,2,3]));
+
+function Cat (name, owner) {
+  this.name = name;
+  this.owner = owner;
+}
+
+Cat.prototype.cuteStatement = function(){
+  return `${this.owner} loves ${this.name}`;
+};
+
+let phil = new Cat('phil', 'ali');
+
+Cat.prototype.cuteStatement = function() {
+  return `Everyone loves ${this.name}`;
+};
+
+Cat.prototype.meow = function() {
+  return `${this.name} meow~`;
+};
+
+phil.meow = function() {
+  return "joey sucks";
+};
+
+console.log(phil.cuteStatement());
+console.log(phil.meow());
+
+function Student (fname, lname) {
+  this.fname = fname;
+  this.lname = lname;
+  this.courses = [];
+}
+
+Student.prototype.name = function() {
+  return `${this.fname, this.lname}`;
+};
+
+Student.prototype.enroll = function(course) {
+  if (!this.courses.includes(course)) this.courses.push(course);
+};
+
+Student.prototype.courseLoad = function() {
+  let courseDepts = {};
+  this.courses.forEach (function (el) {
+    if (courseDepts[el.department]) {
+      courseDepts[el.department] += el.credit;
+    } else {
+    courseDepts[el.department] = el.credit;
+    }
+  });
+  return courseDepts;
+};
