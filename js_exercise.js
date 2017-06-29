@@ -127,4 +127,103 @@ function sumRec (arr) {
   return (arr[0] + sumRec(arr.slice(1)));
 }
 
-console.log(sumRec([3, 5, -7, 10]));
+// console.log(sumRec([3, 5, -7, 10]));
+
+function exponent1 (base, n) {
+  if (n === 0) return 1;
+  return (base * exponent1(base, n - 1));
+}
+
+function exponent2 (base, n) {
+  if (n === 0) return 1;
+  if (n === 1) return base;
+  if (n % 2 === 0) {
+    return exponent2(base, n / 2) * exponent2(base, n / 2);
+  }
+  else {
+    return base * (exponent2(base, (n - 1) / 2) * exponent2(base, (n - 1) / 2));
+  }
+}
+
+function exponent3 (base,n) {
+  return Math.pow(base,n);
+}
+
+// var start = new Date().getTime();
+//
+// console.log(exponent2(5, 3));
+//
+// var end = new Date().getTime();
+//
+// console.log(end - start);
+
+function fibonacci(n) {
+  if (n <= 0) return [];
+  if (n === 1) return [1];
+  if (n === 2) return [1,1];
+
+  let fib = fibonacci(n-1);
+  fib.push(fib[fib.length - 2] + fib[fib.length - 1]);
+  return fib;
+}
+
+// console.log(fibonacci(8));
+
+function bsearch(arr, target) {
+
+  let mid = Math.floor(arr.length / 2);
+  if (arr[mid] === target) {
+    return mid;
+  }
+  else if (arr.length === 1) {
+    return -1;
+  }
+  else if (arr[mid] > target) {
+    return bsearch(arr.slice(0, mid), target);
+  }
+  else {
+    return mid + 1 + bsearch(arr.slice(mid+1), target);
+  }
+}
+
+// console.log(bsearch([1,3,4,5,6,7,8,9], 1));
+
+function mergesort(arr) {
+  if (arr.length === 1) return arr;
+  let mid = Math.floor(arr.length/2);
+
+  let left = mergesort(arr.slice(0,mid));
+  let right = mergesort(arr.slice(mid));
+
+  return merge(left, right);
+}
+
+function merge(left, right) {
+  let mergeArray = [];
+
+  while (left.length > 0 && right.length > 0) {
+   let ele1 = left[0];
+   let ele2 = right[0];
+
+   if (ele1 > ele2) {
+     mergeArray.push(right.shift());
+   } else {
+     mergeArray.push(left.shift());
+   }
+  }
+
+  return mergeArray.concat(left.concat(right));
+}
+
+
+// console.log(mergesort([4,1,3, 4, 6, 8, 9, 1, 2, 1, 1]));
+
+function subsets(arr) {
+  if (arr.length === 0) return [[]];
+
+  let prevSubs = subsets(arr.slice(0, arr.length - 1));
+  let last = arr[arr.length-1];
+  return prevSubs.concat(prevSubs.map((ele) => ele.concat(last)));
+}
+
+console.log(subsets([1,2,3]));
